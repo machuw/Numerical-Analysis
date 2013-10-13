@@ -1,4 +1,6 @@
-def signum(x):
+def sgn(x):
+    ''' use signum function gives the same result,
+        but avoids the possibility of overflow or underflow '''
     if x < 0:
         return -1
     elif x > 0:
@@ -7,6 +9,7 @@ def signum(x):
         return 0
 
 def bisection0(func, a, b, TOL=0.0001, N=100):
+    ''' stopping criteria: |p - p(n)| < |b(n)- a(n)|/2 < TOL '''
     a = float(a)
     b = float(b)
     FA = func(a)
@@ -17,7 +20,7 @@ def bisection0(func, a, b, TOL=0.0001, N=100):
         if (p == 0) or ((b-a)/2 < TOL):
             print("Method success after N iteration, N=%d" % i)
             return p
-        if signum(FA)*signum(FP) > 0:
+        if sgn(FA)*sgn(FP) > 0:
             a = p
             FA = func(p)
         else:
@@ -27,6 +30,7 @@ def bisection0(func, a, b, TOL=0.0001, N=100):
     return
 
 def bisection1(func, a, b, TOL=0.0001, N=100):
+    ''' stopping criteria: |p - p(n)|/|p| < |b(n+1) - a(n+1)|/|a(n+1)| < TOL '''
     a = float(a)
     b = float(b)
     FA = func(a)
@@ -37,7 +41,7 @@ def bisection1(func, a, b, TOL=0.0001, N=100):
         if (p == 0):
             print("Method success after N iteration, N=%d" % i)
             return p
-        if signum(FA)*signum(FP) > 0:
+        if sgn(FA)*sgn(FP) > 0:
             a = p
             FA = func(p)
         else:
